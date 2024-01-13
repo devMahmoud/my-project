@@ -1,0 +1,7 @@
+<h1>Movies</h1>
+<%= form_with url: search_movies_path, method: :get, data: { remote: true } do |form| %>
+  <%= form.text_field :actor_name %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<%= render 'movies/movies_list', movies: @movies %>
