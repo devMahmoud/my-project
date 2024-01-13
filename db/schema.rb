@@ -10,8 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_13_114059) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "actors", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "actors_movies", force: :cascade do |t|
+    t.bigint "actor_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_actors_movies_on_actor_id"
+    t.index ["movie_id"], name: "index_actors_movies_on_movie_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "city"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations_movies", force: :cascade do |t|
+    t.bigint "location_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_locations_movies_on_location_id"
+    t.index ["movie_id"], name: "index_locations_movies_on_movie_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.integer "year"
+    t.string "director"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "user_name"
+    t.integer "stars", null: false
+    t.text "text"
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_reviews_on_movie_id"
+  end
+
+  add_foreign_key "actors_movies", "actors"
+  add_foreign_key "actors_movies", "movies"
+  add_foreign_key "locations_movies", "locations"
+  add_foreign_key "locations_movies", "movies"
+  add_foreign_key "reviews", "movies"
 end
