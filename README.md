@@ -26,7 +26,7 @@ To get a local copy of this project on your machine follow these steps
 `rails import:movies_and_reviews`
 - Run this command to start the server:
 `rails s`
-- Open `http://127.0.0.1:3000` in your browser.
+- Open `localhost:3000` in your browser.
 - Enjoy!
 ## Authors
 👤 **Mahmoud Makhlouf**
